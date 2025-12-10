@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', sans-serif;
+    --font-space-grotesk: 'Space Grotesk', sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    @apply text-gray-400 antialiased;
+    background: #030712;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Grain texture */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    background-repeat: repeat;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Blue ambient orb */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -300px;
+    left: -300px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-gray-900/40 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-hover {
+    @apply hover:border-brand-500/30 transition-colors duration-300;
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-emerald {
+    @apply bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  /* Glow effects */
+  .glow-brand {
+    @apply shadow-[0_0_20px_rgba(14,165,233,0.3)];
+  }
+
+  .glow-brand-hover {
+    @apply hover:shadow-[0_0_40px_rgba(14,165,233,0.5)];
+  }
+
+  .glow-white {
+    @apply shadow-[0_0_20px_rgba(255,255,255,0.3)];
+  }
+
+  .glow-white-hover {
+    @apply hover:shadow-[0_0_40px_rgba(255,255,255,0.5)];
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-8 py-4 bg-white text-gray-950 rounded-xl font-semibold glow-white glow-white-hover transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-xl font-semibold hover:bg-white/10 hover:border-brand-500/30 transition-all duration-300;
+  }
+
+  /* Card styles */
+  .card {
+    @apply glass rounded-2xl p-8 glass-hover;
+  }
+
+  /* Orb backgrounds */
+  .orb-brand {
+    @apply absolute w-96 h-96 bg-brand-600/20 rounded-full blur-[120px];
+  }
+
+  .orb-purple {
+    @apply absolute w-96 h-96 bg-purple-600/20 rounded-full blur-[120px];
+  }
+}
+
+/* Purple ambient orb */
+body > div:first-of-type {
+  position: fixed;
+  bottom: -300px;
+  right: -300px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-800 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-700;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+  @apply bg-brand-500/30 text-white;
+}
